@@ -1,0 +1,8 @@
+name: scrape_workshop
+channels:
+ - defaults
+dependencies:
+- python =3.10
+- scrapy =2.11
+- python-confluent-kafka =2.2
+- beautifulsoup4 >= 4.8.2
