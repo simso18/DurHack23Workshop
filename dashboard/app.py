@@ -1,7 +1,7 @@
 from dash import Dash, dcc, html, Input, Output, callback, dash_table
 import plotly
 
-from ..common import HockeyTeamResults
+from common import HockeyTeamResults
 
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
@@ -62,4 +62,4 @@ def update_graph_live(n, team: str):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8080)

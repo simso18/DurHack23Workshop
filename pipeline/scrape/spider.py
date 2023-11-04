@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from scrapy.http import Request, Response
 from scrapy import Field, Item
 
-from ...settings import USER_AGENT
+from settings import USER_AGENT
 
 class HockeyResultsItem(Item):
     data = Field()

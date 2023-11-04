@@ -1,8 +1,8 @@
 from confluent_kafka import Consumer, KafkaError
 import json
 
-from ...settings import KAFKA_CONFIGS, KAFKA_TOPIC
-from ...common import HockeyTeamResults
+from settings import KAFKA_CONFIGS, KAFKA_TOPIC
+from common import HockeyTeamResults
 
 def push_to_sqlite():
     consumer = Consumer({

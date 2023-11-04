@@ -3,13 +3,16 @@
 FROM python:3.10-slim
 WORKDIR /src
 
+# common layers shared between both images
+COPY settings.py settings.py
+COPY common common
+RUN pip install -r ./common/requirements.txt
+
 # docker builds in layers; requirements are less likely to change than the app itself
-COPY ./requirements.txt ./requirements.txt
-RUN pip install --default-timeout=100 -r requirements.txt
+COPY ./dashboard/requirements.txt ./dashboard/requirements.txt
+RUN pip install --default-timeout=100 -r ./dashboard/requirements.txt
 
-COPY ../settings.py ../settings.py
-COPY ../common ../common
-RUN pip install -r ../common/requirements.txt
+COPY dashboard dashboard
+CMD python -m dashboard.app
 
-COPY . .
-CMD python app.py
+EXPOSE 8080

@@ -7,4 +7,5 @@ KAFKA_TOPIC = "hockey-team-results"
 # for scrapy
 USER_AGENT = "Python/3. Scrapy/2.11"
 DOWNLOAD_DELAY = 1  # 1 second in between requests
-ITEM_PIPELINES = {"src.scrape.kafka_pipeline": 0}
+SPIDER_MODULES = ["pipeline.scrape"]
+ITEM_PIPELINES = {"pipeline.scrape.kafka_pipeline": 0}
