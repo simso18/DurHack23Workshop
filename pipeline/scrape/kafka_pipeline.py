@@ -18,6 +18,8 @@ class KafkaPipeline:
             kafka_configs=crawler.settings.get("KAFKA_CONFIGS"),
             topic=crawler.settings.get("KAFKA_TOPIC"),
         )
+    
+    def open_spider(self, spider: Spider) -> None: pass
 
     def close_spider(self, spider: Spider) -> None:
         self.producer.flush()

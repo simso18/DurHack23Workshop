@@ -3,10 +3,10 @@ import json
 from bs4 import BeautifulSoup
 from typing import List
 
-from ...settings import KAFKA_CONFIGS, KAFKA_TOPIC
-from ...common import HockeyTeamResults, HockeyTeamResultsDict
+from settings import KAFKA_CONFIGS, KAFKA_TOPIC
+from common import HockeyTeamResults, HockeyTeamResultsDict
 
-def ele_has_class(ele: element, cls: str) -> bool:
+def ele_has_class(ele, cls: str) -> bool:
     if ele.attrs:
         classes = ele.attrs.get("class")
         if classes and cls in classes:
@@ -39,7 +39,6 @@ def parse_table(soup: BeautifulSoup) -> List[HockeyTeamResultsDict]:
         )
 
     return formatted_rows 
-
 
 def push_to_sqlite():
     consumer = Consumer({

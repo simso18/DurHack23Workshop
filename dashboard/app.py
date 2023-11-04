@@ -1,8 +1,10 @@
 from dash import Dash, dcc, html, Input, Output, callback, dash_table
 import plotly
+from logging import getLogger
 
-from ..common import HockeyTeamResults
+from common import HockeyTeamResults
 
+logger = getLogger(__name__)
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = Dash("HockeyTeamResults", external_stylesheets=external_stylesheets)
@@ -26,10 +28,12 @@ app.layout = html.Div(
 
 @callback(Output("data-table", "data"), Input("interval-component", "n_intervals"))
 def update_data_table(n):
+    logger.info("updating data table...")
     return HockeyTeamResults().get_data()
 
 @callback(Output("selected-team", "options"), Input("interval-component", "n_intervals"))
 def update_team_options(n):
+    logger.info("updating teams...")
     data = HockeyTeamResults().get_data()
     return {result["TeamName"] for result in data}
 
@@ -39,6 +43,7 @@ def update_team_options(n):
     Input("selected-team", "value"),
 )
 def update_graph_live(n, team: str):
+    logger.info("updating graph...")
     data = HockeyTeamResults().get_data()
     team_data = [data_point for data_point in data if data_point["TeamName"] == team]
 
@@ -62,4 +67,5 @@ def update_graph_live(n, team: str):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    HockeyTeamResults().create_table()
+    app.run(debug=True, port=8080)

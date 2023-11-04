@@ -23,19 +23,27 @@ services:
   
   pipeline:
     image: durhack/pipeline
-    build: ./pipeline
+    build:
+      context: ./
+      dockerfile: ./pipeline/Dockerfile
     networks:
       - pipeline-network
     volumes:
       - "sqlite-db:/db"
+    depends_on:
+      - kafka
 
   dashboard:
     image: durhack/dashboard
-    build: ./dashboard
+    build:
+      context: ./
+      dockerfile: ./dashboard/Dockerfile
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     volumes:
-      - "sqlite-db:/db:ro"
+      - "sqlite-db:/db"
+    depends_on:
+      - pipeline
   
 volumes:
   kafka-data:

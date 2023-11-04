@@ -4,7 +4,7 @@ from itertools import chain
 from enum import Enum
 from typing import TypedDict, Optional, List
 
-from ..settings import SQLITE_DATABASE, SQLITE_TABLE
+from settings import SQLITE_DATABASE, SQLITE_TABLE
 
 SQLITE_MAX_ARGS = 999
 
