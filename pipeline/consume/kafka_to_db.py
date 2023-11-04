@@ -6,7 +6,7 @@ from typing import List
 from settings import KAFKA_CONFIGS, KAFKA_TOPIC
 from common import HockeyTeamResults, HockeyTeamResultsDict
 
-def ele_has_class(ele: element, cls: str) -> bool:
+def ele_has_class(ele, cls: str) -> bool:
     if ele.attrs:
         classes = ele.attrs.get("class")
         if classes and cls in classes:

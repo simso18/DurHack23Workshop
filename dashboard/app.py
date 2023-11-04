@@ -62,4 +62,5 @@ def update_graph_live(n, team: str):
 
 
 if __name__ == "__main__":
+    HockeyTeamResults().create_table()
     app.run(debug=True, port=8080)

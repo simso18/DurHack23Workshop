@@ -13,6 +13,5 @@ COPY ./dashboard/requirements.txt ./dashboard/requirements.txt
 RUN pip install --default-timeout=100 -r ./dashboard/requirements.txt
 
 COPY dashboard dashboard
-CMD python -m dashboard.app
-
 EXPOSE 8080
+CMD python -m dashboard.app
