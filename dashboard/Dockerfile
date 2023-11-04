@@ -5,7 +5,7 @@ WORKDIR /src
 
 # docker builds in layers; requirements are less likely to change than the app itself
 COPY ./requirements.txt ./requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install --default-timeout=100 -r requirements.txt
 
 COPY ../settings.py ../settings.py
 COPY ../common ../common
