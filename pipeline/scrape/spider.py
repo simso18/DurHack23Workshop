@@ -37,10 +37,12 @@ class HockeyResultsSpider(scrapy.Spider):
                 }
             )
         next_page = int(response.meta["page"]) + 1
-        return Request(
-            url=f"https://www.scrapethissite.com/pages/forms/?per_page=250&page_num={next_page}",
-            headers={"User-Agent": USER_AGENT},
-            meta={
-                "page": next_page
-            }
-        )
+
+        if next_page < 10:
+            return Request(
+                url=f"https://www.scrapethissite.com/pages/forms/?per_page=250&page_num={next_page}",
+                headers={"User-Agent": USER_AGENT},
+                meta={
+                    "page": next_page
+                }
+            )

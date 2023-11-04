@@ -30,6 +30,8 @@ services:
       - pipeline-network
     volumes:
       - "sqlite-db:/db"
+    depends_on:
+      - kafka
 
   dashboard:
     image: durhack/dashboard
@@ -40,6 +42,8 @@ services:
       - "127.0.0.1:8080:8080"
     volumes:
       - "sqlite-db:/db"
+    depends_on:
+      - pipeline
   
 volumes:
   kafka-data:
