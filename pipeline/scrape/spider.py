@@ -7,7 +7,7 @@ from scrapy import Field, Item
 from settings import USER_AGENT
 
 class HockeyResultsItem(Item):
-    data = Field()
+    table = Field()
 
 class HockeyResultsSpider(scrapy.Spider):
     name = "hockey-results-spider"
@@ -17,8 +17,14 @@ class HockeyResultsSpider(scrapy.Spider):
 
     def parse(self, response: Response) -> Any:
         soup = BeautifulSoup(response.text, features="lxml")
+        hockey_table = soup.find("table")
 
-        yield HockeyResultsItem(soup)
+        if not hockey_table:
+            raise ValueError("No table can be found")
+        
+        yield HockeyResultsItem(
+            table=str(hockey_table)
+        )
         yield self.paginated_request(response)
 
     def paginated_request(self, response: Response=None):
